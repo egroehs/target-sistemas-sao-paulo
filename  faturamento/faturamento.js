@@ -12,22 +12,18 @@ fs.readFile("dados.json", "utf8", (err, data) => {
     const dados = JSON.parse(data);
 
     const valores = dados.map((item) => item.valor);
-
-    const soma = valores.reduce((sum, valor) => sum + valor, 0);
-    const mediaMensal = soma / valores.length;
-
-    // Filtra os valores maiores que 0
     const valoresValidos = valores.filter((valor) => valor > 0);
 
-    const menorValor = Math.min(...valoresValidos);
-    const maiorValor = Math.max(...valoresValidos);
-
+    const soma = valoresValidos.reduce((sum, valor) => sum + valor, 0);
+    const mediaMensal = soma / valoresValidos.length;
 
     // Conta o número de dias com faturamento superior à média mensal
     const diasAcimaDaMedia = valores.filter(
       (valor) => valor > mediaMensal
     ).length;
 
+     const menorValor = Math.min(...valoresValidos);
+     const maiorValor = Math.max(...valoresValidos);
 
     console.log(
       `O menor valor de faturamento ocorrido em um dia do mês é: ${menorValor}. \n` +
